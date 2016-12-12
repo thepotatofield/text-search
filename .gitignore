@@ -1,0 +1,148 @@
+##### Intellij #####
+*.iml
+.idea/
+*.ipr
+*.iws
+/out/
+.idea_modules/
+atlassian-ide-plugin.xml
+target
+/.idea
+/.idea_modules
+/.classpath
+/.project
+/.settings
+/RUNNING_PID
+
+##### Netbeans #####
+nbproject/private/
+build/
+nbbuild/
+dist/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+.nb-gradle/
+
+
+##### SublimeText #####
+*.sublime-project
+*.sublime-workspace
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+sftp-config.json
+
+
+##### Eclipse #####
+*.pydevproject
+.project
+.metadata
+bin/**
+tmp/**
+tmp/**/*
+*.tmp
+*.bak
+*.swp
+*~.nib
+local.properties
+.classpath
+.settings/
+.loadpath
+/src/main/resources/rebel.xml
+.externalToolBuilders/
+*.launch
+.cproject
+.buildpath
+.gradle
+.target
+*.launch
+
+
+##### Java & Maven #####
+/build/
+/bin/
+target/
+bin/*
+target/*
+*.jar
+*.war
+*.ear
+*.db
+*.class
+hs_err_pid*
+pom.xml.tag
+pom.xml.releaseBackup
+pom.xml.versionsBackup
+pom.xml.next
+release.properties
+dependency-reduced-pom.xml
+buildNumber.properties
+.mvn/timing.properties
+
+
+##### Mercurial #####
+/.hg/*
+*/.hg/*
+.hgignore
+
+
+##### OSX #####
+.DS_Store
+.Spotlight-V100
+.Trashes
+._*
+
+
+##### Windows #####
+Thumbs.db
+Desktop.ini
+
+
+##### Vim #####
+vim/bundle/*
+vim/sessions/*
+vim/vim-backup/*
+vim/vim-tmp/*
+vim/vim-undo/*
+vim/vim-view/*
+Session.vim
+.netrwhist
+
+
+##### Bash #####
+bash_history
+bash_prompt_old
+
+
+##### Misc #####
+tmp
+tmp/*
+*.swp
+
+### SBT ###
+.cache
+.history
+.lib
+lib_managed
+src_managed
+project/boot
+project/plugins/project
+/logs/
+/project/*-shim.sbt
+/project/project/
+/project/target/
+/target/
+.sbtserver/
+
+
+##### Play #####
+logs
+project/project
+project/target
+out
+RUNNING_PID
+
+##### Scala-IDE specific #####
+.scala_dependencies
+.worksheet
