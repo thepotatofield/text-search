@@ -1,8 +1,27 @@
 # Simple Text Search
 
 ### Description
- * Allows to search for words in a definite set of files
- * Files having the most matches are ranked based on a "very simple" weighing mechanism:
+ * Allows to search for words in a definite set of files and rank those based on their matching scores.
+ * The notion of search engine is here composable. It relies on 3 high-order functions that can be combined to create different "flavors" of search engines:
+  * a MatcherFunction, defining when 2 words are a match, or not
+```scala
+// input: the term to look for, the dataset to search from
+// output: 1 if match, 0 otherwise
+type MatcherFunction = (String, List[String]) => Int
+```
+  * a CounterFunction, defining how we should count the match (e.g. if only one of occurence of a term in a dataset weighs the same multiple occurences of that same term)
+```scala
+// input: the terms to look for, the dataset to search from, the matcher method
+// output: the amount of point collected by the terms on the given dataset
+type CounterFunction = (List[String], List[String], MatcherFunction) => Int
+```
+  * a ScorerFunction, defining the way that the score of a dataset should be calculated. It determinates the final ranking
+```scala
+// input: nb search terms, nb of words in dataset, nb of matches
+// output: the computed score
+type ScorerFunction = (Int, Int, Int) => Int
+```  
+ * Currently the scoring method is based on a "very simple" weighing mechanism:
    * each search term gives the same amount of points
    * the amount of points for each term is simply defined on a base 100 (e.g. if 5 search terms are provided, each term matching will weigh 20)
  * The files are selected based on the directory path given at application startup
@@ -18,7 +37,7 @@
 
  2. Setup & start
   * **Option1 - From the binaries**
-   * Download and unzip the compiled classes from  [here](https://github.com/thepotatofield/text-search/raw/master/binaries/simple-text-search.zip)
+   * Unzip the compiled classes from the **binaries** folder
    * Start the application from the **classes** folder:
 ```bash
 $ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_and_search>
@@ -47,13 +66,14 @@ $ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_a
  * Examples
 ```bash
 cmd> :search -exact abc def ghi // search for "abc, def, ghi"
-cmd> :search abc def ghi        // loose search on "abc, def, ghi"
-cmd> :search -l abc def ghi     // loose search on "abc, def, ghi"
+cmd> :search abc def ghi        // loose search for "abc, def, ghi"
+cmd> :search -l abc def ghi     // loose search for "abc, def, ghi"
 ```
 
 ### Testing
 
  * Testing is based on [Scalatest](http://www.scalatest.org)
+ * Note that only a minimal basic test spec is available for demo and discussion purposes :)
  * From the project folder, run:   
  ```bash
  $ sbt test

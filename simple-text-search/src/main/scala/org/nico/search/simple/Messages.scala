@@ -8,21 +8,32 @@ object Messages {
   // Infos
   object Infos {
 
+    val Help =
+      """
+        |--------
+        |Commands
+        |--------
+        |  :quit, :q  - Exit the app
+        |  :help, :h  - Display this help
+        |  :data  - Display loaded file names
+        |  :max   - Set the max amount of results to return
+        |  :search, :s <optional-search-type> <search-terms> - Execute a search. Look for the given search terms from the loaded data.
+        |
+        |--------------
+        |Search example
+        |--------------
+        |  ':search abc def ghi' - search in the loaded data for partial or full match for the terms "abc, def, ghi"
+        |  ':search -e abc def ghi' - search in the loaded data for exact match for the terms "abc, def, ghi"
+        |
+        |------------
+        |Search types
+        |------------
+        |  -loose, -l (default) - Term matching executed against only part or full word
+        |  -exact, -e - Term should match exactly full word """.stripMargin
+
     val Quit = "Bye"
 
     val LoadedDatasets = (nbDatasets: Int) => s"$nbDatasets files loaded successfully !"
-
-    val Help =
-      """
-        |Commands:
-        |  :quit  - Exit the app
-        |  :help  - Display this help
-        |  :data  - Display loaded file names
-        |  :max   - Set the max amount of results to return
-        |  :search <searchType> <searchTerms> - Trigger a search of the given type with given terms
-        |Search types:
-        |  -loose, -l (default) - Term matching executed against only part or full word
-        |  -exact, -e - Term should match exactly full word""".stripMargin
 
     val SearchTerms = (searchTerms: List[String]) => s"Searching for '${searchTerms.mkString(", ")}' "
 

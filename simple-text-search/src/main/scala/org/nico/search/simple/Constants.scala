@@ -1,7 +1,8 @@
 package org.nico.search.simple
 
+
 /**
-  * Created by nicolasaubry on 11/12/2016.
+  * Created by nicolasaubry on 12/12/2016.
   */
 object Constants {
 

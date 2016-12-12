@@ -1,8 +1,8 @@
 package org.nico.search.simple.app
 
-import org.nico.search.simple.Constants._
 import org.nico.search.simple.Messages.Warns._
 import org.nico.search.simple.Messages.Infos._
+import org.nico.search.simple.Constants._
 import org.nico.search.simple.app.Console.Command
 import org.nico.search.simple.domain.Model.DatasetScore
 import org.nico.search.simple.domain.datasource.Datasource
@@ -63,10 +63,31 @@ class Controller(datasource: Datasource) {
   }
 
   def executeSearch(searchEngine: SearchEngine, searchTerms: List[String]): List[DatasetScore] = {
-    Console.info(SearchTerms(searchTerms))
-    val scores = searchEngine.execute(searchTerms, datasource.datasets, maxResults)
+    val cleanedTerms = searchTerms
+      .map(_.map(c => if (c.isLetterOrDigit) c else WordSeparator))
+      .flatMap(_.split(WordSeparator))
+      .map(_.toLowerCase.trim)
+      .filter(_.trim().nonEmpty)
+
+    Console.info(SearchTerms(cleanedTerms))
+
+    val scores = searchEngine.execute(cleanedTerms, datasource.datasets, maxResults)
     scores.foreach(fs => Console.info(FileScoreResult(fs.id, fs.score)))
     scores
+  }
+
+  def parseLine(line: String): List[String] = {
+    line
+      // 1 - replace non alpha numeric chars by WordSeparator (e.g. simple-text-search -> simple text search)
+      .map(c => if (c.isLetterOrDigit) c else WordSeparator)
+      // 2 - split the words based on WordSeparator (i.e. white space)
+      .split(WordSeparator)
+      // 3 - normalize each word (lowercase and trim)
+      .map(_.toLowerCase.trim)
+      // 4 - filter info empty words
+      .filterNot(_.isEmpty)
+      // 5 - return an immutable List
+      .toList
   }
 
   private def max(arg: Option[String]): Unit = {

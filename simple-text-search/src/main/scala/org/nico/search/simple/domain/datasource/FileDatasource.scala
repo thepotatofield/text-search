@@ -2,10 +2,10 @@ package org.nico.search.simple.domain.datasource
 
 import java.io.File
 
-import org.nico.search.simple.Constants._
 import org.nico.search.simple.Messages.Warns._
 import org.nico.search.simple.app.Console
 import org.nico.search.simple.domain.Model.Dataset
+import org.nico.search.simple.Constants._
 
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.concurrent.Future
@@ -43,7 +43,7 @@ class FileDatasource(val directory: File) extends Datasource {
       Try {
         val words = Source.fromFile(file)(Codec.UTF8)
           .getLines // read by lines
-          .map(parseFileLine) // parse each line as List[String]
+          .map(parseLine) // parse each line as List[String]
           .flatten // simple way to transform from List[List[String]] to List[String]
         Dataset(file.getName, words.toList)
       } match {
@@ -53,7 +53,7 @@ class FileDatasource(val directory: File) extends Datasource {
     }
   }
 
-  private def parseFileLine(line: String): List[String] = {
+  def parseLine(line: String): List[String] = {
     line
       // 1 - replace non alpha numeric chars by WordSeparator (e.g. simple-text-search -> simple text search)
       .map(c => if (c.isLetterOrDigit) c else WordSeparator)
@@ -62,11 +62,9 @@ class FileDatasource(val directory: File) extends Datasource {
       // 3 - normalize each word (lowercase and trim)
       .map(_.toLowerCase.trim)
       // 4 - filter info empty words
-      .filterNot(_.isEmpty)
+      .filter(_.nonEmpty)
       // 5 - return an immutable List
       .toList
   }
-
-
 
 }
