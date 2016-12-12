@@ -27,6 +27,8 @@ type ScorerFunction = (Int, Int, Int) => Int
    * the amount of points for each term is simply defined on a base 100 (e.g. if 5 search terms are provided, each term matching will weigh 20)
  * The files are selected based on the directory path given at application startup
 
+ * **Disclaimer:** Some parts of the implementation are not necessarily following the most optimized of "best practices" path, as I also took the opportunity to demonstrate and discuss some of the interesting features provided by Scala. 
+
 ### Pre-requisites
  * Install [Scala 2.11.x](https://www.scala-lang.org/download/)
  * (Optional) Install [SBT 0.13.x](http://www.scala-sbt.org/download.html)
