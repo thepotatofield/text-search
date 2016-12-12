@@ -34,21 +34,21 @@ type ScorerFunction = (Int, Int, Int) => Int
 
 ### Setup
 
- 1. Clone this repository
+#### 1 - Clone this repository
 
- 2. Setup & start
-  * **Option1 - From the binaries**
-   * Unzip the compiled classes from the **binaries** folder
-   * Start the application from the **classes** folder:
+#### 2 - Setup & start
+ * **Option1 - From the binaries**
+  * Unzip the compiled classes from the [**binaries**](https://github.com/thepotatofield/text-search/tree/master/binaries) folder   
+  * Start the application from the **classes** folder:
 ```bash
 $ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_and_search_from>
 ```
-  * **Option2 - From the sources**
-   * Compile with SBT from the project folder:
- ```bash
- $ sbt compile
- ```
-   * Start the application from the **simple-text-search/target/scala-2.11/classes** folder:   
+ * **Option2 - From the sources**
+  * Compile with SBT from the project folder:
+```bash
+$ sbt compile
+```
+  * Start the application from the **simple-text-search/target/scala-2.11/classes** folder:   
 ```bash
 $ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_and_search_from>
 ```

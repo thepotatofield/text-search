@@ -63,16 +63,21 @@ class Controller(datasource: Datasource) {
   }
 
   def executeSearch(searchEngine: SearchEngine, searchTerms: List[String]): List[DatasetScore] = {
+    // clean searched terms list from non alphanumeric chars
     val cleanedTerms = searchTerms
       .map(_.map(c => if (c.isLetterOrDigit) c else WordSeparator))
       .flatMap(_.split(WordSeparator))
       .map(_.toLowerCase.trim)
       .filter(_.trim().nonEmpty)
 
+    // display the actual search terms
     Console.info(SearchTerms(cleanedTerms))
 
+    // search
     val scores = searchEngine.execute(cleanedTerms, datasource.datasets, maxResults)
-    scores.foreach(fs => Console.info(FileScoreResult(fs.id, fs.score)))
+    if(scores.isEmpty) Console.info(ZeroMatch)
+    else scores.foreach(fs => Console.info(FileScoreResult(fs.id, fs.score)))
+
     scores
   }
 

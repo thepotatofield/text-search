@@ -18,7 +18,7 @@ class SearchEngine(counter: CounterFunction, matcher: MatcherFunction, scorer: S
     }
 
     // 2 - rank and limit amount of results
-    fileScores.sortBy(_.score).reverse.take(maxResults)
+    fileScores.sortBy(_.score).reverse.take(maxResults).filter(_.score > 0)
   }
 
 

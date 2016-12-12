@@ -19,17 +19,18 @@ object Messages {
         |  :max   - Set the max amount of results to return
         |  :search, :s <optional-search-type> <search-terms> - Execute a search. Look for the given search terms from the loaded data.
         |
-        |--------------
-        |Search example
-        |--------------
-        |  ':search abc def ghi' - search in the loaded data for partial or full match for the terms "abc, def, ghi"
-        |  ':search -e abc def ghi' - search in the loaded data for exact match for the terms "abc, def, ghi"
-        |
         |------------
         |Search types
         |------------
-        |  -loose, -l (default) - Term matching executed against only part or full word
-        |  -exact, -e - Term should match exactly full word """.stripMargin
+        |  -loose, -l (default) - Search term should match partially or exactly the word
+        |  -exact, -e - Search term should match exactly the word
+        |
+        |--------
+        |Examples
+        |--------
+        |  ':search abc def ghi' - search in the loaded data for partial or full match for the terms "abc, def, ghi"
+        |  ':search -e abc def ghi' - search in the loaded data for exact match for the terms "abc, def, ghi"
+        |""".stripMargin
 
     val Quit = "Bye"
 
@@ -41,7 +42,7 @@ object Messages {
 
     val MaxResultUpdate = (max: Int) => s"Max result value set to $max"
 
-    val ElapsedTime = (start: Long, end: Long) => s"elapsed time: ${end - start} ms"
+    val ZeroMatch = s"No dataset matching any of the given searched terms"
 
   }
 
