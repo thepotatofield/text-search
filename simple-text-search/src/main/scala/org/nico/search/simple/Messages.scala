@@ -17,7 +17,7 @@ object Messages {
         |Commands:
         |  :quit  - Exit the app
         |  :help  - Display this help
-        |  :data  - Display loaded files data
+        |  :data  - Display loaded file names
         |  :max   - Set the max amount of results to return
         |  :search <searchType> <searchTerms> - Trigger a search of the given type with given terms
         |Search types:

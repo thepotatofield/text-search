@@ -9,36 +9,40 @@
 
 ### Pre-requisites
  * Install [Scala 2.11.x](https://www.scala-lang.org/download/)
- * Install compiling and testing [SBT 0.13.x](http://www.scala-sbt.org/download.html)
-  * SBT is only needed if you want to compile and run the tests
+ * (Optional) Install [SBT 0.13.x](http://www.scala-sbt.org/download.html)
+  * **Note:** SBT is needed only if you want to compile the sources and run the tests
 
-### Usage
+### Setup & Usage
 
  1. Clone this repository
 
- 2. Setup
-  * Either get the binaries and unzip:   
-  * Compile with SBT. From the **text-search** project folder:
+ 2. Setup & start
+  * **Option1 - From the binaries**
+   * Download and unzip the compiled classes from  [here](https://github.com/thepotatofield/text-search/raw/master/binaries/simple-text-search.zip)
+   * Start the application from the **classes** folder:
+```bash
+$ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_and_search>
+```
+  * **Option2 - From the sources**
+   * Compile with SBT from the project folder:
  ```bash
  $ sbt compile
  ```
-
- 3. Start the application
-  * From the **/text-search/simple-text-search/target/scala-2.11/classes** project folder:
+   * Start the application from the **simple-text-search/target/scala-2.11/classes** folder:   
 ```bash
-$ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_search>
+$ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_and_search>
 ```
 
- 4. Command-line interface
+ 3. Command-line interface
 
 | Command       | Description   |
 | ------------- | ------------- |
 | :quit, :q | Exit the app |
-| :help, :h | Display the help |
-| :data | Display the data loaded from the files |
+| :help, :h | Show this help |
+| :data | Show the loaded file names |
 | :max | Set the max amount of results to return |
-| :search -loose, -l <terms> | Trigger a **loose** search of with given terms. Matching applies to only part or full word. Default. |
-| :search -exact, -e <terms> | Trigger an **exact** search of with given terms. Search term and word should be identical applies |
+| :search -loose, -l <terms> | Execute a **loose** search of with given terms. Matching applies to only part or full word. Default. |
+| :search -exact, -e <terms> | Execute an **exact** search of with given terms. Search term and word should be identical applies |
 
  * Examples
 ```bash
@@ -50,10 +54,7 @@ cmd> :search -l abc def ghi     // loose search on "abc, def, ghi"
 ### Testing
 
  * Testing is based on [Scalatest](http://www.scalatest.org)
- * Additional pre-requisite:
-    Install[SBT](http://www.scala-sbt.org/download.html)
- * Usage
-  * From the **text-search** project folder, run:   
+ * From the project folder, run:   
  ```bash
  $ sbt test
  ```
