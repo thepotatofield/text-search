@@ -32,7 +32,7 @@ type ScorerFunction = (Int, Int, Int) => Int
  * (Optional) Install [SBT 0.13.x](http://www.scala-sbt.org/download.html)
   * **Note:** SBT is needed only if you want to compile the sources and run the tests
 
-### Setup & Usage
+### Setup
 
  1. Clone this repository
 
@@ -41,7 +41,7 @@ type ScorerFunction = (Int, Int, Int) => Int
    * Unzip the compiled classes from the **binaries** folder
    * Start the application from the **classes** folder:
 ```bash
-$ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_and_search>
+$ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_and_search_from>
 ```
   * **Option2 - From the sources**
    * Compile with SBT from the project folder:
@@ -50,10 +50,10 @@ $ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_a
  ```
    * Start the application from the **simple-text-search/target/scala-2.11/classes** folder:   
 ```bash
-$ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_and_search>
+$ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_and_search_from>
 ```
 
- 3. Command-line interface
+### Commands
 
 | Command       | Description   |
 | ------------- | ------------- |
