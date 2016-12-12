@@ -3,7 +3,7 @@
 ### Description
  * Allows to search for words in a definite set of files and rank those based on their matching scores.
  * The notion of search engine is here composable, allowing to easily create different "flavors" of search engines.
- * Thus, composing a "search engine" consists in combining 3 higher-order functions:
+ * Composing a "search engine" consists in combining 3 higher-order functions:
   * a Matcher function, defining when 2 words are a match, or not
 ```scala
 // input: the term to look for, the dataset to search from
