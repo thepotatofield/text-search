@@ -63,8 +63,8 @@ $ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_a
 | :help, :h | Show this help |
 | :data | Show the loaded file names |
 | :max | Set the max amount of results to return |
-| :search -loose, -l <terms> | Execute a **loose** search of with given terms. Matching applies to only part or full word. Default. |
-| :search -exact, -e <terms> | Execute an **exact** search of with given terms. Search term and word should be identical applies |
+| :search -loose, -l <terms> | Execute a **loose** search. Matching applies to only part or full word. Default. |
+| :search -exact, -e <terms> | Execute an **exact** search. Search term and word should be identical applies |
 
  * Examples
 ```bash
