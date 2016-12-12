@@ -64,11 +64,11 @@ $ scala org.nico.search.simple.app.Main <dir_path_containing_the_files_to_load_a
 | :data | Show the loaded file names |
 | :max | Set the max amount of results to return |
 | :search -loose, -l <terms> | Execute a **loose** search. Matching applies to only part or full word. Default. |
-| :search -exact, -e <terms> | Execute an **exact** search. Search term and word should be identical applies |
+| :search -exact, -e <terms> | Execute an **exact** search. Search term and word should be identical. |
 
  * Examples
 ```bash
-cmd> :search -exact abc def ghi // search for "abc, def, ghi"
+cmd> :search -exact abc def ghi // exact search for "abc, def, ghi"
 cmd> :search abc def ghi        // loose search for "abc, def, ghi"
 cmd> :search -l abc def ghi     // loose search for "abc, def, ghi"
 ```
