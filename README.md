@@ -2,20 +2,21 @@
 
 ### Description
  * Allows to search for words in a definite set of files and rank those based on their matching scores.
- * The notion of search engine is here composable. It relies on 3 high-order functions that can be combined to create different "flavors" of search engines:
-  * a MatcherFunction, defining when 2 words are a match, or not
+ * The notion of search engine is here composable, allowing to easily create different "flavors" of search engines.
+ * Thus, composing a "search engine" consists in combining 3 higher-order functions:
+  * a Matcher function, defining when 2 words are a match, or not
 ```scala
 // input: the term to look for, the dataset to search from
 // output: 1 if match, 0 otherwise
 type MatcherFunction = (String, List[String]) => Int
 ```
-  * a CounterFunction, defining how we should count the match (e.g. if only one of occurence of a term in a dataset weighs the same multiple occurences of that same term)
+  * a Counter function, defining how we should count the match (e.g. if only one occurence of a term in a dataset weighs the same than multiple occurences of that same term)
 ```scala
 // input: the terms to look for, the dataset to search from, the matcher method
 // output: the amount of point collected by the terms on the given dataset
 type CounterFunction = (List[String], List[String], MatcherFunction) => Int
 ```
-  * a ScorerFunction, defining the way that the score of a dataset should be calculated. It determinates the final ranking
+  * a Scorer function, defining the way that the score of a dataset should be calculated. It determinates the final ranking
 ```scala
 // input: nb search terms, nb of words in dataset, nb of matches
 // output: the computed score
