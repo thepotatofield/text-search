@@ -78,6 +78,6 @@ cmd> :search -l abc def ghi     // loose search for "abc, def, ghi"
  * Testing is based on [Scalatest](http://www.scalatest.org)
  * Note that only a minimal basic test spec is available for demo and discussion purposes :)
  * From the project folder, run:   
- ```bash
- $ sbt test
- ```
+```bash
+$ sbt test
+```
