@@ -20,21 +20,36 @@ class Controller(datasource: Datasource) {
   private var maxResults: Int = DefaultMaxResult
 
   def prompt(): Unit = {
-    Console.input.fold(invalid)(execute)
+    Console.input.fold(invalid)(handleCommand)
   }
 
-  private def execute(command: Command): Unit = {
+  // command handler methods
+  private def handleCommand(command: Command): Unit = {
     val args = command.args
     command.cmd match {
       case ":quit" | ":q"   => Main.stop(0, None)
       case ":help" | ":h"   => help
       case ":data"          => data
       case ":max"           => max(args.headOption)
-      case ":search" | ":s" => search(args)
+      case ":search" | ":s" => handleSearchCommand(args)
       case _                => invalid
     }
   }
 
+  private def handleSearchCommand(args: List[String]): Unit = {
+    args match {
+      case head :: tail => head match {
+        case "-loose" | "-l" => search(LooseSearch, tail)
+        case "-exact" | "-e" => search(ExactSearch, tail)
+        case _ => search(LooseSearch, args)
+      }
+      case _ => Console.warn(InvalidSearch)
+    }
+    prompt()
+  }
+
+
+  // command execution methods
   private def invalid: Unit = {
     Console.warn(InvalidCommand)
     prompt()
@@ -50,19 +65,7 @@ class Controller(datasource: Datasource) {
     prompt()
   }
 
-  private def search(args: List[String]): Unit = {
-    args match {
-      case head :: tail => head match {
-        case "-loose" | "-l" => executeSearch(LooseSearch, tail)
-        case "-exact" | "-e" => executeSearch(ExactSearch, tail)
-        case _ => executeSearch(LooseSearch, args)
-      }
-      case _ => Console.warn(InvalidSearch)
-    }
-    prompt()
-  }
-
-  def executeSearch(searchEngine: SearchEngine, searchTerms: List[String]): List[DatasetScore] = {
+  def search(searchEngine: SearchEngine, searchTerms: List[String]): List[DatasetScore] = {
     // clean searched terms list from non alphanumeric chars
     val cleanedTerms = searchTerms
       .map(_.map(c => if (c.isLetterOrDigit) c else WordSeparator))
@@ -79,20 +82,6 @@ class Controller(datasource: Datasource) {
     else scores.foreach(fs => Console.info(FileScoreResult(fs.id, fs.score)))
 
     scores
-  }
-
-  def parseLine(line: String): List[String] = {
-    line
-      // 1 - replace non alpha numeric chars by WordSeparator (e.g. simple-text-search -> simple text search)
-      .map(c => if (c.isLetterOrDigit) c else WordSeparator)
-      // 2 - split the words based on WordSeparator (i.e. white space)
-      .split(WordSeparator)
-      // 3 - normalize each word (lowercase and trim)
-      .map(_.toLowerCase.trim)
-      // 4 - filter info empty words
-      .filterNot(_.isEmpty)
-      // 5 - return an immutable List
-      .toList
   }
 
   private def max(arg: Option[String]): Unit = {

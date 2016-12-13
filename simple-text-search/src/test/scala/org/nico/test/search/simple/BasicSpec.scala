@@ -39,7 +39,7 @@ class BasicSpec extends FlatSpec with Matchers {
   s"Searching for $searchTerms with LooseSearch engine" should s"result in $expectedLooseResult% score" in {
     Await.ready(sampleDatasource.loadDatasets, 5 seconds)
     val controller = new Controller(sampleDatasource)
-    val scores = controller.executeSearch(LooseSearch, searchTerms)
+    val scores = controller.search(LooseSearch, searchTerms)
     scores should not be empty
     scores.head.id shouldBe sampleFileName
     scores.head.score shouldBe expectedLooseResult
@@ -49,7 +49,7 @@ class BasicSpec extends FlatSpec with Matchers {
   s"Searching for $searchTerms with ExactSearch engine" should s"result in $expectedExactResult% score" in {
     Await.ready(sampleDatasource.loadDatasets, 5 seconds)
     val controller = new Controller(sampleDatasource)
-    val scores = controller.executeSearch(ExactSearch, searchTerms)
+    val scores = controller.search(ExactSearch, searchTerms)
     scores should not be empty
     scores.head.id shouldBe sampleFileName
     scores.head.score shouldBe expectedExactResult
